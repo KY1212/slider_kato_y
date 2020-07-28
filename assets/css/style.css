@@ -37,6 +37,7 @@ footer {
 .sliderWrap .slider {
   margin: 20px 0;
   height: 342px;
+  width: 607px;
   position: relative;
   overflow: hidden;
 }
@@ -44,7 +45,6 @@ footer {
 .sliderWrap .slideset {
   position: absolute;
   height: auto;
-  overflow: hidden;
   /* width: 607px; */
 }
 

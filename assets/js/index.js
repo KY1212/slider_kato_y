@@ -3,7 +3,7 @@ $(function () {
     function cloneSlide(slideSetWidth) {
       $(".slide:last-child").clone(true).prependTo($(".slideset")),
       $(".slide:nth-child(2)").clone(true).appendTo($(".slideset"));
-      $(".slider").css("width", slideSetWidth);
+      $(".slideset").css("width", slideSetWidth);
       $(".slide")
     }
 
@@ -27,7 +27,10 @@ $(function () {
         $(".slideset").css({
           left: initialSlide
         });
-        
+    }
+
+    function currentIndex() {
+
     }
 
     //インジケーターのクリック処理
@@ -70,7 +73,6 @@ $(function () {
         },duration,function() {
           clickFlag = true;
         });
-        // console.log("nextボタンのslideCount "+slideCount);
 
       //slideCountが1以下だった場合
       if(slideCount < 1){
@@ -92,10 +94,9 @@ $(function () {
         });
       }
       function delayedCall(second, callBack){
-          setTimeout(callBack, second * 1000);
+        setTimeout(callBack, second * 1000);
       }
 
-      // return sliding(slideCount);
       }else{
         return false;
       }
