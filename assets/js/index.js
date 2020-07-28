@@ -17,7 +17,7 @@ $(function () {
     }
 
     function initial(slideCount,slideWidth) {
-      console.log("initial"+slideCount);
+      console.log("initial "+slideCount);
       //インジケーター初期位置
       $(`#${slideCount}`).css({
         backgroundColor: "#fff"
@@ -27,8 +27,6 @@ $(function () {
         $(".slideset").css({
           left: initialSlide
         });
-        return sliderNext(slideCount,slideWidth);
-        return sliderPrev(slideCount);
         
     }
 
@@ -53,12 +51,15 @@ $(function () {
   }
 
   //nextボタン押下でsliding実行
-  function sliderNext(slideCount,slideWidth,slideNum){
+  function sliderNext(slideCount,slideWidth){
 
-    $(".nav .next").on("click",function(){
+    $(".nav .next").click(function(){
       let clickFlag = true;
-      console.log(slideCount, slideWidth, slideNum);
+      const slideNum = $(".slide").length;
+
       if(clickFlag){
+        console.log("nextボタンの"+slideCount, slideWidth);
+
         clickFlag = false;
         slideCount++;
          //変数slidingにアニメーション効果を格納
@@ -69,7 +70,7 @@ $(function () {
         },duration,function() {
           clickFlag = true;
         });
-        console.log("next slideCount "+slideCount);
+        // console.log("nextボタンのslideCount "+slideCount);
 
       //slideCountが1以下だった場合
       if(slideCount < 1){
@@ -101,55 +102,8 @@ $(function () {
     });
   }
 
-  //prevボタン押下でsliding実行
-  function sliderPrev(slideCount){
-      $(".nav .prev").on("click",function(){
-        let clickFlag = true;
 
-          if(clickFlag){
-              clickFlag = false;
-              slideCount--;
-              return sliding(slideCount);
 
-          }else{
-              return false;
-          }
-      });
-  }
-
-    //変数slidingにアニメーション効果を格納
-    function sliding(slideCount,slideWidth,slideNum,clickFlag) {
-      const duration = 500;
-      //スライドの移動処理
-      $(".slideset").stop(true).animate({
-          left: slideCount * -slideWidth
-      },duration,function() {
-          clickFlag = true;
-      });
-
-      //slideCountが1以下だった場合
-      if(slideCount < 1){
-        //スライド1枚目から6枚目に移動(アニメーション0秒)
-        slideCount = 5;
-        delayedCall(0.5,function(){
-            $(".slideset").animate({
-                left: slideCount * -slideWidth
-            },0);
-        });
-  
-      //slideCountがslideNum上限に差し掛かった場合
-      }else if(slideCount == slideNum){
-          slideCount = 0;
-          delayedCall(0.5,function(){
-              $(".slideset").animate({
-                  left: slideCount * -slideWidth
-              },0);
-          });
-      }
-      function delayedCall(second, callBack){
-          setTimeout(callBack, second * 1000);
-      }
-    }
 
   function init() {
     const $slide = $(".slide");
@@ -165,9 +119,8 @@ $(function () {
     initial(slideCount,slideWidth);
     clickIndicator(slideWidth,slideNum);
 
-    sliderNext(slideNum);
-    sliderNext(slideNum);
-    sliderPrev();
+    sliderNext(slideCount,slideWidth);
+    // sliderPrev();
   }
   init();
 
