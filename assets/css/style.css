@@ -1,0 +1,119 @@
+* {
+  background-color: #eeeeee;
+}
+
+img {
+  vertical-align: bottom;
+  width:100%;
+  max-width: 100%;
+  height: 322px;
+  object-fit: cover; 
+}
+
+main {
+  height: 444px;
+  padding: 100px 0 480px;
+}
+
+footer {
+  height: 480px;
+  width: 607px;
+}
+
+.sliderWrap {
+  width: 607px;
+  margin: auto;
+  position: relative;
+}
+
+.sliderWrap .heading {
+  width: 146px;
+  line-height: 52px;
+  margin: auto;
+  font-size: 52px;
+  position: relative;
+}
+
+.sliderWrap .slider {
+  margin: 20px 0;
+  height: 342px;
+  position: relative;
+  overflow: hidden;
+}
+
+.sliderWrap .slideset {
+  position: absolute;
+  height: auto;
+}
+
+.sliderWrap .slide {
+  float: left;
+  overflow: hidden;
+}
+
+.sliderWrap .slide p {
+  background-color: #fff;
+  padding: 10px;
+  width: 587px;
+}
+
+.indicator {
+  height: 10px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.dot {
+  border-radius: 50%;
+  background-color: #999999;
+  width: 10px;
+  height: 10px;
+  cursor: pointer;
+}
+
+.dot + .dot{
+  margin-left: 10px;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: calc(100% - 40px);
+  margin: auto;
+  position: absolute;
+  bottom: 171px;
+  left: 20px;
+  background-color: transparent;
+  z-index: 9999;
+}
+
+.nav .prev,
+.nav .next {
+  border-radius: 50%;
+  width: 21px;
+  height: 21px;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.nav .prev .triangle {
+  background-color: #fff;
+  margin-right: 4px;
+  border-style: solid;
+  border-width: 6px 8.7px 6px 0;
+  border-color: transparent #007bff transparent transparent;
+}
+
+.nav .next .triangle {
+  background-color: #fff;
+  margin-left: 4px;
+  border-style: solid;
+  border-width: 6px 0 6px 8.7px;
+  border-color: transparent transparent transparent #007bff;
+}
+
