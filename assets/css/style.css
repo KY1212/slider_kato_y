@@ -1,4 +1,4 @@
-* {
+body {
   background-color: #eeeeee;
 }
 
@@ -10,8 +10,8 @@ img {
   object-fit: cover; 
 }
 
+/*=====main=====*/
 main {
-  height: 444px;
   padding: 100px 0 480px;
 }
 
@@ -20,53 +20,46 @@ footer {
   width: 607px;
 }
 
-.sliderWrap {
-  width: 607px;
-  margin: auto;
+.slideWrap {
+  margin: 20px auto;
   position: relative;
+  width: 607px;
+  overflow: hidden;
 }
 
-.sliderWrap .heading {
-  width: 146px;
-  line-height: 52px;
-  margin: auto;
+.slideWrap .heading {
   font-size: 52px;
-  position: relative;
+  text-align: center;
 }
 
-.sliderWrap .slider {
-  margin: 20px 0;
-  height: 342px;
-  width: 607px;
-  position: relative;
-  overflow: hidden;
-}
-
-.sliderWrap .slideset {
-  position: absolute;
-  height: auto;
-  /* width: 607px; */
-}
-
-.sliderWrap .slide {
-  float: left;
-  overflow: hidden;
-}
-
-.sliderWrap .slide p {
-  background-color: #fff;
+/*=====slider=====*/
+.slider {
+  height: 322px;
   padding: 10px;
-  width: 587px;
+  background-color: #fff;
+  position: relative;
+
 }
 
+.slider .slides {
+  position: absolute;
+  display: flex;
+}
+
+.slider .slide {
+  width: 607px;
+}
+
+/*=====indicator=====*/
 .indicator {
   height: 10px;
   position: relative;
   display: flex;
   justify-content: center;
+  margin-top: 20px;
 }
 
-.dot {
+.indicator .dot {
   border-radius: 50%;
   background-color: #999999;
   width: 10px;
@@ -74,25 +67,26 @@ footer {
   cursor: pointer;
 }
 
+.indicator .dot.active {
+  background-color: #fff;
+}
+
 .dot + .dot{
   margin-left: 10px;
 }
 
+/*=====nav=====*/
 .nav {
   display: flex;
   justify-content: space-between;
-  align-items: center;
   width: calc(100% - 40px);
-  margin: auto;
   position: absolute;
-  bottom: 171px;
+  bottom: 191px;
   left: 20px;
-  background-color: transparent;
-  z-index: 9999;
 }
 
-.nav .prev,
-.nav .next {
+.prev,
+.next {
   border-radius: 50%;
   width: 21px;
   height: 21px;
@@ -103,18 +97,20 @@ footer {
   cursor: pointer;
 }
 
-.nav .prev .triangle {
+.navIcon::before {
+  content: "";
   background-color: #fff;
-  margin-right: 4px;
   border-style: solid;
+}
+
+.prev.navIcon::before {
+  margin-right: 4px;
   border-width: 6px 8.7px 6px 0;
   border-color: transparent #007bff transparent transparent;
 }
 
-.nav .next .triangle {
-  background-color: #fff;
+.next.navIcon::before {
   margin-left: 4px;
-  border-style: solid;
   border-width: 6px 0 6px 8.7px;
   border-color: transparent transparent transparent #007bff;
 }

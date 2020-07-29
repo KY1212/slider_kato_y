@@ -1,251 +1,123 @@
 $(function () {
 
-    /*================================
-    init関数
-    初期表示に必要な関数
-    ================================*/
-    
-    //最初と最後のスライドを複製
+  //変数の設定
+    const $slides = $(".slides");
+    const $slide = $(".slide");
+    const slideWidth = $slide.outerWidth();
+    const duration = 1000;
+    let currentIndex=1;
+    let slideNum = $slide.length;
+    let indicatorHTML = "";
+    let dotIndex = 1;
+    let indicator = $(".indicator");
+
+    //最初と最後のスライドをクローン
     function cloneSlide(slideSetWidth) {
-      $(".slide:last-child").clone(true).prependTo($(".slideset")),
-      $(".slide:nth-child(2)").clone(true).appendTo($(".slideset"));
-      $(".slideset").css("width", slideSetWidth);
-      $(".slide")
+      $lastSlide = $(".slide:last-child");
+      $firstSlide = $(".slide:first-child");
+      $lastSlide.clone(true).prependTo(".slides");
+      $firstSlide.clone(true).appendTo(".slides");
+      $(".slides").css("width", slideSetWidth);
+      return slideNum;
     }
 
     //インジケーターの生成
-    function addIndicator($slide,indicatorHTML,dotIndex,$indicator) {
+    function addIndicator() {
       $slide.each(function (){
         indicatorHTML += `<div class="dot" id="${dotIndex}">` + '</div>';
-        $indicator.html(indicatorHTML);
+        indicator.html(indicatorHTML);
         dotIndex++;
       });
     }
 
-    //スライド、インジケーターの初期位置
-    function initial(slideCount,slideWidth) {
-      $(`#${slideCount}`).css({
-        backgroundColor: "#fff"
-        });
-        const initialSlide = slideCount * -slideWidth;
-        $(".slideset").css({
-          left: initialSlide
-        });
+    //スライドの初期位置
+    function initialSlide() {
+      $(".slides").animate({
+        left: currentIndex * -slideWidth
+      },0);
+      console.log(currentIndex);
+      $(`#${currentIndex}`).addClass("active");
     }
 
-    /*================================
-    dynamic関数
-    動的な処理の関数
-    ================================*/
+    //スライドアニメーション
+    function changeSlide(clickDot) {
 
-      //インジケーターのクリック処理
-    function clickIndicator(slideWidth,idname,currentIndex){
-      const $dot = $(".dot");
-      $dot.on("click", function(){
-        idname = $(this).attr("id");
-        currentIndex = $(`.dot#${idname}`);
-
-      //インジケーターの色をスライド位置に合わせて変更
-        $dot.css({
-          backgroundColor: "#999999"
-        });
-        currentIndex.css({
-            backgroundColor: "#fff"
-        });
-
-        //クリックされたドット位置とスライド位置を揃える
-        const slideCount = idname;
-        $(".slideset").stop(true).animate({
-            left: slideCount * -slideWidth
-        });
-
-        console.log("idnmae "+idname);
-        console.log("currentIndex "+currentIndex);
-        // return idname;
-    });
-  }
-
-  //nextボタン押下でsliding実行
-  function sliderNext(slideCount,slideWidth,slideNum){
-    $(".nav .next").click(function(){
-      let clickFlag = true;
-      
-      if(clickFlag){
-        console.log("nextボタンの"+slideCount, slideWidth);
-        clickFlag = false;
-        slideCount++;
-         //変数slidingにアニメーション効果を格納
-        const duration = 500;
-        //スライドの移動処理
-        $(".slideset").stop(true).animate({
-          left: slideCount * -slideWidth
-        },duration,function() {
-          clickFlag = true;
-        });
-        //slideCount上限に達した場合、重複スライドをスキップする
-        if(slideCount == slideNum+1){
-          slideCount = 1;
-          delayedCall(0.5,function(){
-            $(".slideset").animate({
-              left: slideCount * -slideWidth
-            },0);
-          });
-        }
-        function delayedCall(second, callBack){
-          setTimeout(callBack, second * 1000);
-        }
-      //クリックフラグ抜ける
-      }else{
-        return false;
+      if(clickDot!=null){
+        currentIndex = clickDot;
       }
-      const $dot = $(".dot");
 
-      currentIndex = $(`.dot#${slideCount}`);
+      $slides.stop(true).animate({
+        left: currentIndex * -100 + "%"
+      },duration);
+      console.log(currentIndex);
+      if(currentIndex == slideNum){
+        currentIndex = 0;
+            $(".slides").animate({
+                left: currentIndex * -slideWidth
+            },0);
+      }else if(currentIndex < 1) {
+        currentIndex = slideNum;
+        console.log(slideNum);
+          $(".slides").animate({
+              left: currentIndex * -slideWidth
+          },0);
+      }
+      currentDot();
+    }
 
-      //インジケーターの色をスライド位置に合わせて変更
-      $dot.css({
-        backgroundColor: "#999999"
-      });
-      currentIndex.css({
-          backgroundColor: "#fff"
-      });
+    //現在のスライド位置をインジケーターに表示
+    function currentDot() {
+      console.log("現在の位置"+currentIndex,slideNum);
+      let currentDot = currentIndex;
 
-    });
-  }
+      if(currentIndex==0){
+        currentDot = slideNum;
+      }
 
-    //nextボタン押下でsliding実行
-    function sliderNext(slideCount,slideWidth,slideNum){
-      $(".nav .next").click(function(){
-        let clickFlag = true;
-        
-        if(clickFlag){
-          console.log("nextボタンの"+slideCount, slideWidth);
-          clickFlag = false;
-          slideCount++;
-           //変数slidingにアニメーション効果を格納
-          const duration = 500;
-          //スライドの移動処理
-          $(".slideset").stop(true).animate({
-            left: slideCount * -slideWidth
-          },duration,function() {
-            clickFlag = true;
-          });
-          //slideCount上限に達した場合、重複スライドをスキップする
-          if(slideCount == slideNum+1){
-            slideCount = 1;
-            delayedCall(0.5,function(){
-              $(".slideset").animate({
-                left: slideCount * -slideWidth
-              },0);
-            });
-          }
-          function delayedCall(second, callBack){
-            setTimeout(callBack, second * 1000);
-          }
-        //クリックフラグ抜ける
-        }else{
-          return false;
-        }
-        const $dot = $(".dot");
-  
-        currentIndex = $(`.dot#${slideCount}`);
-  
-        //インジケーターの色をスライド位置に合わせて変更
-        $dot.css({
-          backgroundColor: "#999999"
-        });
-        currentIndex.css({
-            backgroundColor: "#fff"
-        });
+      $(".dot").removeClass("active");
+      $(`#${currentDot}`).addClass("active");
+    }
 
+    //インジケータークリック処理
+    function clickDots() {
+      $(".dot").on("click", function(){
+        let clickDot = $(this).attr("id");
+        changeSlide(clickDot);
       });
     }
 
-        //prevボタン押下でsliding実行
-        function sliderPrev(slideCount,slideWidth){
-          $(".nav .prev").click(function(){
-            let clickFlag = true;
-            console.log("slideCount "+slideCount);
-            if(clickFlag){
-              clickFlag = false;
-              slideCount--;
-               //変数slidingにアニメーション効果を格納
-              const duration = 500;
-              //スライドの移動処理
-              $(".slideset").stop(true).animate({
-                left: slideCount * -slideWidth
-              },duration,function() {
-                clickFlag = true;
-              });
-              //slideCountが1以下だった場合
-              if(slideCount+1 < 2){
-                console.log("1以下slideCount "+slideCount);
+    //prevボタンの処理
+    function prevSlide() {
+      currentIndex--;
+      changeSlide();
+    }
 
-                //スライド1枚目から6枚目に移動(アニメーション0秒)
-                slideCount = 4;
-                console.log("1以下slideCount "+slideCount);
-                delayedCall(0.5,function(){
-                    $(".slideset").animate({
-                        left: slideCount * -slideWidth
-                    },0);
-                });
+    //nextボタンの処理
+    function nextSlide() {
+      currentIndex++;
+      changeSlide();
+    }
 
-                //slideCountがslideNum上限に差し掛かった場合
-                }
-              function delayedCall(second, callBack){
-                setTimeout(callBack, second * 1000);
-              }
-            //クリックフラグ抜ける
-            }else{
-              return false;
-            }
-            const $dot = $(".dot");
-      
-            currentIndex = $(`.dot#${slideCount}`);
-      
-            //インジケーターの色をスライド位置に合わせて変更
-            $dot.css({
-              backgroundColor: "#999999"
-            });
-            currentIndex.css({
-                backgroundColor: "#fff"
-            });
-      
-          });
-        }
+    //タイマー機能
+    function startTimer() {
+      const interval = 1000;
+      timer = setInterval(changeSlide, interval);
+    }
 
-    /*================================
-    関数まとめ
-    ================================*/
-  function init() {
-    const $slide = $(".slide");
-    const slideWidth = $slide.outerWidth();
-    const slideNum = $slide.length;
-    const slideSetWidth = slideWidth * (slideNum+2);
-    const slideCount = 1;
-    const $indicator = $(".indicator");
-    const indicatorHTML = "";
-    const dotIndex = 1;
-    const idname = null;
-    const currentIndex = null;
-    cloneSlide(slideSetWidth);
-    addIndicator($slide,indicatorHTML,dotIndex,$indicator);
-    initial(slideCount,slideWidth);
+    function init() {
+      cloneSlide();
+      addIndicator();
+      initialSlide();
+    }
 
-    clickIndicator(slideWidth,slideNum,idname,currentIndex);
-    sliderNext(slideCount,slideWidth,slideNum);
-    sliderPrev(slideCount,slideWidth,slideNum);
-  }
+    function clickEvent() {
+      $(".next").on("click", nextSlide);
+      $(".prev").on("click", prevSlide);
+      $(".dot").on("click", clickDots);
+    }
 
-  // function dynamic() {
-  //   clickIndicator(slideWidth,slideNum,idname,currentIndex);
-  //   sliderNext(slideCount,slideWidth,slideNum);
-  //   sliderPrev(slideCount,slideWidth,slideNum);
-  // }
+    // startTimer();
+    init();
+    clickEvent();
 
-  init();
-  // dynamic();
-
-});
-
-
+  });
