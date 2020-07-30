@@ -41,7 +41,7 @@ $(function () {
 
     //スライドアニメーション
     function changeSlide(clickDot) {
-
+      console.log("clickDot "+clickDot);
       if(clickDot!=null){
         currentIndex = clickDot;
       }
@@ -50,7 +50,7 @@ $(function () {
         left: currentIndex * -100 + "%"
       },duration);
       console.log(currentIndex);
-      if(currentIndex == slideNum){
+      if(currentIndex == slideNum && clickDot != slideNum){
         currentIndex = 0;
             $(".slides").animate({
                 left: currentIndex * -slideWidth
@@ -63,6 +63,12 @@ $(function () {
           },0);
       }
       currentDot();
+    }
+
+    //インジケータークリック処理
+    function clickDots() {
+        let clickDot = $(this).attr("id");
+        changeSlide(clickDot);
     }
 
     //現在のスライド位置をインジケーターに表示
@@ -78,13 +84,6 @@ $(function () {
       $(`#${currentDot}`).addClass("active");
     }
 
-    //インジケータークリック処理
-    function clickDots() {
-      $(".dot").on("click", function(){
-        let clickDot = $(this).attr("id");
-        changeSlide(clickDot);
-      });
-    }
 
     //prevボタンの処理
     function prevSlide() {
