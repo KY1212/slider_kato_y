@@ -1,6 +1,6 @@
 $(function () {
-
-  //変数の設定
+    //変数の設定
+    const $slideWrap =$(".slideWrap");
     const $slides = $(".slides");
     const $slide = $(".slide");
     const slideWidth = $slide.outerWidth();
@@ -10,6 +10,7 @@ $(function () {
     let indicatorHTML = "";
     let dotIndex = 1;
     let indicator = $(".indicator");
+    let nextIndex = 1;
 
     //最初と最後のスライドをクローン
     function cloneSlide(slideSetWidth) {
@@ -40,17 +41,19 @@ $(function () {
     }
 
     //スライドアニメーション
-    function changeSlide(clickDot) {
-      console.log("clickDot "+clickDot);
-      if(clickDot!=null){
-        currentIndex = clickDot;
+    function changeSlide(index) {
+      console.log("index "+index);
+      if(index!=null){
+        currentIndex = index;
+      }else if(index==slideNum){
+        currentIndex = 4;
       }
 
       $slides.stop(true).animate({
         left: currentIndex * -100 + "%"
       },duration);
       console.log(currentIndex);
-      if(currentIndex == slideNum && clickDot != slideNum){
+      if(currentIndex == slideNum && index != slideNum){
         currentIndex = 0;
             $(".slides").animate({
                 left: currentIndex * -slideWidth
@@ -65,6 +68,19 @@ $(function () {
       currentDot();
     }
 
+    //タイマー機能
+    function startTimer() {
+      const interval = 3000;
+      console.log("currentIndex"+currentIndex);
+      timer = setInterval(function(){
+        nextIndex++;
+        changeSlide(nextIndex);
+        if(nextIndex==slideNum){
+          nextIndex=0;
+        }
+      },interval);
+    }
+
     //インジケータークリック処理
     function clickDots() {
         let clickDot = $(this).attr("id");
@@ -75,15 +91,12 @@ $(function () {
     function currentDot() {
       console.log("現在の位置"+currentIndex,slideNum);
       let currentDot = currentIndex;
-
       if(currentIndex==0){
         currentDot = slideNum;
       }
-
       $(".dot").removeClass("active");
       $(`#${currentDot}`).addClass("active");
     }
-
 
     //prevボタンの処理
     function prevSlide() {
@@ -97,10 +110,9 @@ $(function () {
       changeSlide();
     }
 
-    //タイマー機能
-    function startTimer() {
-      const interval = 1000;
-      timer = setInterval(changeSlide, interval);
+    //タイマーの一時停止
+    function stopTimer() {
+      clearInterval(timer);
     }
 
     function init() {
@@ -109,14 +121,24 @@ $(function () {
       initialSlide();
     }
 
+    //クリックで実行
     function clickEvent() {
       $(".next").on("click", nextSlide);
       $(".prev").on("click", prevSlide);
       $(".dot").on("click", clickDots);
     }
 
-    // startTimer();
+    //マウスの位置で動作
+    function mouseEvent() {
+      $slideWrap.on({
+        mouseenter: stopTimer,
+        mouseleave: startTimer
+      });
+    }
+
     init();
+    mouseEvent();
     clickEvent();
+    startTimer();
 
   });
