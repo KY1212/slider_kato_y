@@ -1,4 +1,6 @@
 $(function () {
+  function slider() {
+
     //変数の設定
     const $slideWrap =$(".slideWrap");
     const $slides = $(".slides");
@@ -46,7 +48,6 @@ $(function () {
       }else if(index==slideNum){
         currentIndex = 4;
       }
-
       $slides.stop(true).animate({
         left: currentIndex * -100 + "%"
       },duration);
@@ -134,5 +135,8 @@ $(function () {
     mouseEvent();
     clickEvent();
     startTimer();
+  }
+
+  slider()
 
   });
