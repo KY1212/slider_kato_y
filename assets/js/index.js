@@ -36,13 +36,11 @@ $(function () {
       $(".slides").animate({
         left: currentIndex * -slideWidth
       },0);
-      console.log(currentIndex);
       $(`#${currentIndex}`).addClass("active");
     }
 
     //スライドアニメーション
     function changeSlide(index) {
-      console.log("index "+index);
       if(index!=null){
         currentIndex = index;
       }else if(index==slideNum){
@@ -52,7 +50,6 @@ $(function () {
       $slides.stop(true).animate({
         left: currentIndex * -100 + "%"
       },duration);
-      console.log(currentIndex);
       if(currentIndex == slideNum && index != slideNum){
         currentIndex = 0;
             $(".slides").animate({
@@ -60,7 +57,6 @@ $(function () {
             },0);
       }else if(currentIndex < 1) {
         currentIndex = slideNum;
-        console.log(slideNum);
           $(".slides").animate({
               left: currentIndex * -slideWidth
           },0);
@@ -71,7 +67,6 @@ $(function () {
     //タイマー機能
     function startTimer() {
       const interval = 3000;
-      console.log("currentIndex"+currentIndex);
       timer = setInterval(function(){
         nextIndex++;
         changeSlide(nextIndex);
@@ -89,7 +84,6 @@ $(function () {
 
     //現在のスライド位置をインジケーターに表示
     function currentDot() {
-      console.log("現在の位置"+currentIndex,slideNum);
       let currentDot = currentIndex;
       if(currentIndex==0){
         currentDot = slideNum;
