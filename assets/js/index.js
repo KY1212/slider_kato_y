@@ -26,12 +26,18 @@ $(function () {
 
     //インジケーターの生成
     function addIndicator() {
-      $slide.each(function (){
-        indicatorHTML += `<div class="dot" id="${dotIndex}">` + '</div>';
+      // $slide.each(function (){
+      //   indicatorHTML += `<div class="dot" id="${dotIndex}">` + '</div>';
+      //   indicator.html(indicatorHTML);
+      //   dotIndex++;
+      //   $(`#${currentIndex}`).addClass("active");
+      // });
+      for (let i=1; i<=slideNum; i++){
+        console.log(slideNum);
+        indicatorHTML += `<div class="dot" id="${i}">` + '</div>';
         indicator.html(indicatorHTML);
-        dotIndex++;
         $(`#${currentIndex}`).addClass("active");
-      });
+      }
     }
 
     //スライドアニメーション
@@ -106,7 +112,6 @@ $(function () {
     function init() {
       cloneSlide();
       addIndicator();
-      // initialSlide();
     }
 
     //クリックで実行
