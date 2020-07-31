@@ -5,19 +5,19 @@ $(function () {
     const $slideWrap =$(".sliderWrap");
     const $slides = $(".slides");
     const $slide = $(".slide");
+    const $indicator = $(".indicator");
     const slideWidth = $slide.outerWidth();
     const duration = 1000;
     let currentIndex=1;
     let slideLength = $slide.length;
     let indicatorHTML = "";
-    let indicator = $(".indicator");
     let nextIndex = 1;
 
     //インジケーターの生成
     for (let i=1; i<=slideLength; i++){
       console.log(slideLength);
       indicatorHTML += `<div class="dot" id="${i}">` + '</div>';
-      indicator.html(indicatorHTML);
+      $indicator.html(indicatorHTML);
       $(`#${currentIndex}`).addClass("active");
     }
 
