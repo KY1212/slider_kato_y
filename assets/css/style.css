@@ -49,6 +49,7 @@ footer {
 .slider .slides {
   position: absolute;
   display: flex;
+  left: -100%;
 }
 
 .slider .slide {
@@ -89,7 +90,6 @@ footer {
   bottom: 191px;
   left: 20px;
   z-index: 10;
-
 }
 
 .prev,

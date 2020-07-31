@@ -30,15 +30,8 @@ $(function () {
         indicatorHTML += `<div class="dot" id="${dotIndex}">` + '</div>';
         indicator.html(indicatorHTML);
         dotIndex++;
+        $(`#${currentIndex}`).addClass("active");
       });
-    }
-
-    //スライドの初期位置
-    function initialSlide() {
-      $(".slides").animate({
-        left: currentIndex * -slideWidth
-      },0);
-      $(`#${currentIndex}`).addClass("active");
     }
 
     //スライドアニメーション
@@ -53,13 +46,13 @@ $(function () {
       },duration);
       if(currentIndex == slideNum && index != slideNum){
         currentIndex = 0;
-            $(".slides").animate({
-                left: currentIndex * -slideWidth
-            },0);
+          $(".slides").animate({
+            left: currentIndex * -slideWidth
+          },0);
       }else if(currentIndex < 1) {
         currentIndex = slideNum;
           $(".slides").animate({
-              left: currentIndex * -slideWidth
+            left: currentIndex * -slideWidth
           },0);
       }
       currentDot();
@@ -79,8 +72,8 @@ $(function () {
 
     //インジケータークリック処理
     function clickDots() {
-        let clickDot = $(this).attr("id");
-        changeSlide(clickDot);
+      let clickDot = $(this).attr("id");
+      changeSlide(clickDot);
     }
 
     //現在のスライド位置をインジケーターに表示
@@ -113,7 +106,7 @@ $(function () {
     function init() {
       cloneSlide();
       addIndicator();
-      initialSlide();
+      // initialSlide();
     }
 
     //クリックで実行
