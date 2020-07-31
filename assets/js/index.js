@@ -2,7 +2,7 @@ $(function () {
   function slider() {
 
     //変数の設定
-    const $slideWrap =$(".slideWrap");
+    const $slideWrap =$(".sliderWrap");
     const $slides = $(".slides");
     const $slide = $(".slide");
     const slideWidth = $slide.outerWidth();

@@ -20,24 +20,30 @@ footer {
   width: 607px;
 }
 
-.slideWrap {
+.heading {
+  font-size: 52px;
+  text-align: center;
+}
+
+/*=====slider=====*/
+.sliderWrap {
   margin: 20px auto;
   position: relative;
   width: 607px;
   overflow: hidden;
 }
 
-.slideWrap .heading {
-  font-size: 52px;
-  text-align: center;
-}
-
-/*=====slider=====*/
 .slider {
   height: 322px;
-  padding: 10px;
-  background-color: #fff;
   position: relative;
+}
+
+.whiteEdge {
+  height: 302px;
+  width: 587px;
+  border: solid 10px #fff;
+  position: absolute;
+  z-index: 9;
 }
 
 .slider .slides {
@@ -82,6 +88,8 @@ footer {
   position: absolute;
   bottom: 191px;
   left: 20px;
+  z-index: 10;
+
 }
 
 .prev,
