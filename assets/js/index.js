@@ -43,7 +43,7 @@ $(function () {
             left: currentIndex * -slideWidth
           },0);
       }
-        console.log("changeSlide 下"+currentIndex);
+      console.log("changeSlide 下"+currentIndex);
     }
 
     //タイマー機能
@@ -75,13 +75,15 @@ $(function () {
     //prevボタンの処理
     function prevSlide() {
       currentIndex--;
-      changeSlide();
+      currentDot(currentIndex);
+      changeSlide(currentIndex);
     }
 
     //nextボタンの処理
     function nextSlide() {
       currentIndex++;
-      changeSlide();
+      currentDot(currentIndex);
+      changeSlide(currentIndex);
     }
 
     //タイマーの一時停止
@@ -95,8 +97,8 @@ $(function () {
 
     //クリックで実行
     function clickEvent() {
-      $(".prev .navIcon").on("click", nextSlide);
-      $(".nexrt .navIcon").on("click", prevSlide);
+      $(".prev").on("click", prevSlide);
+      $(".next").on("click", nextSlide);
       $(".dot").on("click", clickDots);
     }
 
