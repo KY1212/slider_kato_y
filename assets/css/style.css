@@ -30,20 +30,15 @@ footer {
   margin: 20px auto;
   position: relative;
   width: 607px;
-  overflow: hidden;
 }
 
 .slider {
+  width: 100%;
+
   height: 322px;
   position: relative;
-}
-
-.whiteEdge {
-  height: 302px;
-  width: 587px;
   border: solid 10px #fff;
-  position: absolute;
-  z-index: 9;
+  overflow: hidden;
 }
 
 .slider .slides {

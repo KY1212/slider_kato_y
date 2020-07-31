@@ -8,11 +8,18 @@ $(function () {
     const slideWidth = $slide.outerWidth();
     const duration = 1000;
     let currentIndex=1;
-    let slideNum = $slide.length;
+    let slideLength = $slide.length;
     let indicatorHTML = "";
-    let dotIndex = 1;
     let indicator = $(".indicator");
     let nextIndex = 1;
+
+    //インジケーターの生成
+    for (let i=1; i<=slideLength; i++){
+      console.log(slideLength);
+      indicatorHTML += `<div class="dot" id="${i}">` + '</div>';
+      indicator.html(indicatorHTML);
+      $(`#${currentIndex}`).addClass("active");
+    }
 
     //最初と最後のスライドをクローン
     function cloneSlide(slideSetWidth) {
@@ -21,42 +28,26 @@ $(function () {
       $lastSlide.clone(true).prependTo(".slides");
       $firstSlide.clone(true).appendTo(".slides");
       $(".slides").css("width", slideSetWidth);
-      return slideNum;
-    }
-
-    //インジケーターの生成
-    function addIndicator() {
-      // $slide.each(function (){
-      //   indicatorHTML += `<div class="dot" id="${dotIndex}">` + '</div>';
-      //   indicator.html(indicatorHTML);
-      //   dotIndex++;
-      //   $(`#${currentIndex}`).addClass("active");
-      // });
-      for (let i=1; i<=slideNum; i++){
-        console.log(slideNum);
-        indicatorHTML += `<div class="dot" id="${i}">` + '</div>';
-        indicator.html(indicatorHTML);
-        $(`#${currentIndex}`).addClass("active");
-      }
+      return slideLength;
     }
 
     //スライドアニメーション
     function changeSlide(index) {
       if(index!=null){
         currentIndex = index;
-      }else if(index==slideNum){
+      }else if(index==slideLength){
         currentIndex = 4;
       }
       $slides.stop(true).animate({
         left: currentIndex * -100 + "%"
       },duration);
-      if(currentIndex == slideNum && index != slideNum){
+      if(currentIndex == slideLength && index != slideLength){
         currentIndex = 0;
           $(".slides").animate({
             left: currentIndex * -slideWidth
           },0);
       }else if(currentIndex < 1) {
-        currentIndex = slideNum;
+        currentIndex = slideLength;
           $(".slides").animate({
             left: currentIndex * -slideWidth
           },0);
@@ -70,7 +61,7 @@ $(function () {
       timer = setInterval(function(){
         nextIndex++;
         changeSlide(nextIndex);
-        if(nextIndex==slideNum){
+        if(nextIndex==slideLength){
           nextIndex=0;
         }
       },interval);
@@ -86,7 +77,7 @@ $(function () {
     function currentDot() {
       let currentDot = currentIndex;
       if(currentIndex==0){
-        currentDot = slideNum;
+        currentDot = slideLength;
       }
       $(".dot").removeClass("active");
       $(`#${currentDot}`).addClass("active");
@@ -111,7 +102,6 @@ $(function () {
 
     function init() {
       cloneSlide();
-      addIndicator();
     }
 
     //クリックで実行
