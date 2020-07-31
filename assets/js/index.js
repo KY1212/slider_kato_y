@@ -8,79 +8,68 @@ $(function () {
     const $indicator = $(".indicator");
     const slideWidth = $slide.outerWidth();
     const duration = 1000;
-    let currentIndex=1;
+    let currentIndex=0;
     let slideLength = $slide.length;
     let indicatorHTML = "";
-    let nextIndex = 1;
 
     //インジケーターの生成
     for (let i=1; i<=slideLength; i++){
-      console.log(slideLength);
-      indicatorHTML += `<div class="dot" id="${i}">` + '</div>';
+      indicatorHTML += "<div class=dot>" + "</div>";
       $indicator.html(indicatorHTML);
-      $(`#${currentIndex}`).addClass("active");
+      $(".dot").eq(currentIndex).addClass("active");
     }
 
     //最初と最後のスライドをクローン
-    function cloneSlide(slideSetWidth) {
-      $lastSlide = $(".slide:last-child");
-      $firstSlide = $(".slide:first-child");
-      $lastSlide.clone(true).prependTo(".slides");
-      $firstSlide.clone(true).appendTo(".slides");
-      $(".slides").css("width", slideSetWidth);
-      return slideLength;
+    function cloneSlide() {
+      const $lastSlide = $slides.find("li:last-child");
+      const $firstSlide = $slides.find("li:first-child");
+      $lastSlide.clone(true).prependTo($slides);
+      $firstSlide.clone(true).appendTo($slides);
     }
 
     //スライドアニメーション
-    function changeSlide(index) {
-      if(index!=null){
-        currentIndex = index;
-      }else if(index==slideLength){
-        currentIndex = 4;
-      }
+    function changeSlide(currentIndex) {
       $slides.stop(true).animate({
-        left: currentIndex * -100 + "%"
+        left: (currentIndex+1) * -100 + "%"
       },duration);
-      if(currentIndex == slideLength && index != slideLength){
-        currentIndex = 0;
+      if(currentIndex == slideLength){
+        currentIndex = 1;
           $(".slides").animate({
             left: currentIndex * -slideWidth
           },0);
-      }else if(currentIndex < 1) {
-        currentIndex = slideLength;
+      }else if(currentIndex == 0) {
+        currentIndex = slideLength+1;
           $(".slides").animate({
             left: currentIndex * -slideWidth
           },0);
       }
-      currentDot();
+        console.log("changeSlide 下"+currentIndex);
     }
 
     //タイマー機能
     function startTimer() {
       const interval = 3000;
       timer = setInterval(function(){
-        nextIndex++;
-        changeSlide(nextIndex);
-        if(nextIndex==slideLength){
-          nextIndex=0;
+        currentIndex++;
+        changeSlide(currentIndex);
+        if(currentIndex==slideLength){
+          currentIndex=0;
         }
+        currentDot(currentIndex);
       },interval);
+    }
+
+    //現在のスライド位置をインジケーターに表示
+    function currentDot(currentIndex) {
+      $(".dot").removeClass("active");
+      $(".dot").eq(currentIndex).addClass("active");
     }
 
     //インジケータークリック処理
     function clickDots() {
-      let clickDot = $(this).attr("id");
-      changeSlide(clickDot);
-    }
-
-    //現在のスライド位置をインジケーターに表示
-    function currentDot() {
-      let currentDot = currentIndex;
-      if(currentIndex==0){
-        currentDot = slideLength;
-      }
-      $(".dot").removeClass("active");
-      $(`#${currentDot}`).addClass("active");
+      index = $(this).index();
+      currentDot(index);
+      changeSlide(index);
     }
 
     //prevボタンの処理
@@ -106,8 +95,8 @@ $(function () {
 
     //クリックで実行
     function clickEvent() {
-      $(".next").on("click", nextSlide);
-      $(".prev").on("click", prevSlide);
+      $(".prev .navIcon").on("click", nextSlide);
+      $(".nexrt .navIcon").on("click", prevSlide);
       $(".dot").on("click", clickDots);
     }
 
@@ -128,3 +117,140 @@ $(function () {
   slider()
 
   });
+
+
+
+
+  // $(function () {
+  //   function slider() {
+  
+  //     //変数の設定
+  //     const $slideWrap =$(".sliderWrap");
+  //     const $slides = $(".slides");
+  //     const $slide = $(".slide");
+  //     const $indicator = $(".indicator");
+  //     const slideWidth = $slide.outerWidth();
+  //     const duration = 1000;
+  //     let currentIndex=0;
+  //     let slideLength = $slide.length;
+  //     let indicatorHTML = "";
+  //     let nextIndex = 0;
+  
+  //     //インジケーターの生成
+  //     for (let i=1; i<=slideLength; i++){
+  //       indicatorHTML += "<div class=dot>" + "</div>";
+  //       $indicator.html(indicatorHTML);
+  //       $(".dot").eq(currentIndex).addClass("active");
+  //     }
+  
+  //     //最初と最後のスライドをクローン
+  //     function cloneSlide() {
+  //       const $lastSlide = $slides.find("li:last-child");
+  //       const $firstSlide = $slides.find("li:first-child");
+  //       $lastSlide.clone(true).prependTo($slides);
+  //       $firstSlide.clone(true).appendTo($slides);
+  //     }
+  
+  //     //スライドアニメーション
+  //     function changeSlide(currentIndex) {
+  //       console.log("changeSlide 上"+currentIndex);
+  
+  //       $slides.stop(true).animate({
+  //         left: (currentIndex+1) * -100 + "%"
+  //       },duration);
+  //       if(currentIndex == slideLength){
+  //         currentIndex = 1;
+  //           $(".slides").animate({
+  //             left: currentIndex * -slideWidth
+  //           },0);
+  //       }else if(currentIndex == 0) {
+  //         currentIndex = slideLength+1;
+  //           $(".slides").animate({
+  //             left: currentIndex * -slideWidth
+  //           },0);
+  //       }
+  
+  //       // if(currentIndex==slideLength-1) {
+  //       //   currentIndex= 0;
+  //         console.log("changeSlide 下"+currentIndex);
+  //       // }
+  //       currentDot(currentIndex);
+  //     }
+  
+  //     //タイマー機能
+  //     function startTimer() {
+  //       const interval = 3000;
+  //       timer = setInterval(function(){
+  //         console.log("startTimer "+currentIndex);
+  //         currentIndex++;
+  //         changeSlide(currentIndex);
+  //         if(currentIndex==slideLength){
+  //           currentIndex=0;
+  //         }
+  //       },interval);
+  //     }
+  
+  //     //現在のスライド位置をインジケーターに表示
+  //     function currentDot(currentIndex) {
+  //       console.log(currentIndex,slideLength);
+  
+  //       console.log("インジェタのcurrentIndex "+currentIndex);
+  //       $(".dot").removeClass("active");
+  //       $(".dot").eq(currentIndex).addClass("active");
+  //       // currentIndex = (slideLength-1);
+  
+  //     }
+  
+  //     //インジケータークリック処理
+  //     function clickDots() {
+  //       index = $(this).index();
+  //       changeSlide(index);
+  //     }
+  
+  
+  //     //prevボタンの処理
+  //     function prevSlide() {
+  //       currentIndex--;
+  //       changeSlide();
+  //     }
+  
+  //     //nextボタンの処理
+  //     function nextSlide() {
+  //       currentIndex++;
+  //       changeSlide();
+  //     }
+  
+  //     //タイマーの一時停止
+  //     function stopTimer() {
+  //       clearInterval(timer);
+  //     }
+  
+  //     function init() {
+  //       cloneSlide();
+  //     }
+  
+  //     //クリックで実行
+  //     function clickEvent() {
+  //       $(".next").on("click", nextSlide);
+  //       $(".prev").on("click", prevSlide);
+  //       $(".dot").on("click", clickDots);
+  //     }
+  
+  //     //マウスの位置で動作
+  //     function mouseEvent() {
+  //       $slideWrap.on({
+  //         mouseenter: stopTimer,
+  //         mouseleave: startTimer
+  //       });
+  //     }
+  
+  //     init();
+  //     mouseEvent();
+  //     clickEvent();
+  //     startTimer();
+  //   }
+  
+  //   slider()
+  
+  //   });
+  
