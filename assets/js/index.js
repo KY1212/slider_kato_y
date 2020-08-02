@@ -28,30 +28,30 @@ $(function () {
       $lastSlide.clone(true).prependTo($slides);
       $firstSlide.clone(true).appendTo($slides);
     }
-
 // .is isanimate アニメーション中は発火しないメソッドをいれる
 
     //スライドアニメーション
     function changeSlide(currentIndex) {
       const slideWidth = $slide.outerWidth();
       $slides.stop(true).animate({
-        left: (currentIndex+1)  * -100 + "%"
+        left: (currentIndex+1) * -100 + "%"
       },duration);
       if(currentIndex == slideLength){
         currentIndex = 1;
-          $(".slides").animate({
-            left: currentIndex * -slideWidth
-          },0);
+        $(".slides").animate({
+          left: currentIndex * -slideWidth
+        },0);
       }else if(currentIndex == -1) {
         currentIndex = slideLength;
-          $(".slides").animate({
-            left: currentIndex * -slideWidth
-          },0);
+        $(".slides").animate({
+          left: currentIndex * -slideWidth
+        },0);
       }
+
       console.log("changeSlide 下"+currentIndex);
     }
 
-    //タイマー機能
+    //タイマースタート
     function startTimer() {
       const interval = 2000;
       timer = setInterval(function(){
@@ -62,6 +62,11 @@ $(function () {
         }
         currentDot(currentIndex);
       },interval);
+    }
+
+    //タイマーの一時停止
+    function stopTimer() {
+      clearInterval(timer);
     }
 
     //現在のスライド位置をインジケーターに表示
@@ -98,11 +103,6 @@ $(function () {
       if(currentIndex == slideLength){
         currentIndex = 0;
       }
-    }
-
-    //タイマーの一時停止
-    function stopTimer() {
-      clearInterval(timer);
     }
 
     function init() {
