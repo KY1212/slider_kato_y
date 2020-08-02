@@ -5,17 +5,20 @@ $(function () {
     //変数の設定
     const $slides = $(".slides");
     const $slide = $(".slide");
-    const $indicator = $(".indicator");
     const duration = 1000;
     let currentIndex=0;
     let slideLength = $slide.length;
-    let indicatorHTML = "";
 
     //インジケーターの生成
-    for (let i=1; i<=slideLength; i++){
-      indicatorHTML += "<div class=dot>" + "</div>";
-      $indicator.html(indicatorHTML);
-      $(".dot").eq(currentIndex).addClass("active");
+    function addIndicator(){
+      const $indicator = $(".indicator");
+      let indicatorHTML = "";
+
+      for (let i=1; i<=slideLength; i++){
+        indicatorHTML += "<div class=dot>" + "</div>";
+        $indicator.html(indicatorHTML);
+        $(".dot").eq(currentIndex).addClass("active");
+      }
     }
 
     //最初と最後のスライドをクローン
@@ -32,7 +35,7 @@ $(function () {
     function changeSlide(currentIndex) {
       const slideWidth = $slide.outerWidth();
       $slides.stop(true).animate({
-        left: (currentIndex+1) * -100 + "%"
+        left: (currentIndex+1)  * -100 + "%"
       },duration);
       if(currentIndex == slideLength){
         currentIndex = 1;
@@ -50,12 +53,12 @@ $(function () {
 
     //タイマー機能
     function startTimer() {
-      const interval = 999000;
+      const interval = 99999;
       timer = setInterval(function(){
         currentIndex++;
         changeSlide(currentIndex);
-        if(currentIndex==slideLength){
-          currentIndex=0;
+        if(currentIndex == slideLength){
+          currentIndex = 0;
         }
         currentDot(currentIndex);
       },interval);
@@ -63,8 +66,8 @@ $(function () {
 
     //現在のスライド位置をインジケーターに表示
     function currentDot(currentIndex) {
-      if(currentIndex==slideLength){
-        currentIndex=0;
+      if(currentIndex == slideLength){
+        currentIndex = 0;
       }
       $(".dot").removeClass("active");
       $(".dot").eq(currentIndex).addClass("active");
@@ -82,8 +85,8 @@ $(function () {
       currentIndex--;
       currentDot(currentIndex);
       changeSlide(currentIndex);
-      if(currentIndex==-1){
-        currentIndex=3;
+      if(currentIndex == -1){
+        currentIndex = 3;
       }
     }
 
@@ -92,8 +95,8 @@ $(function () {
       currentIndex++;
       currentDot(currentIndex);
       changeSlide(currentIndex);
-      if(currentIndex==slideLength){
-        currentIndex=0;
+      if(currentIndex == slideLength){
+        currentIndex = 0;
       }
     }
 
@@ -104,11 +107,12 @@ $(function () {
 
     function init() {
       cloneSlide();
+      addIndicator();
     }
 
     //クリックで実行
     function setEvent() {
-      const $slideWrap =$(".sliderWrap");
+      const $slideWrap = $(".sliderWrap");
       $slideWrap.on({
         mouseenter: stopTimer,
         mouseleave: startTimer
