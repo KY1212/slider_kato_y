@@ -76,7 +76,7 @@ footer {
 }
 
 /*=====nav=====*/
-.nav {
+.btn {
   display: flex;
   justify-content: space-between;
   width: calc(100% - 40px);
@@ -98,19 +98,19 @@ footer {
   cursor: pointer;
 }
 
-.navIcon::before {
+.btnIcon::before {
   content: "";
   background-color: #fff;
   border-style: solid;
 }
 
-.prev.navIcon::before {
+.prev.btnIcon::before {
   margin-right: 4px;
   border-width: 6px 8.7px 6px 0;
   border-color: transparent #007bff transparent transparent;
 }
 
-.next.navIcon::before {
+.next.btnIcon::before {
   margin-left: 4px;
   border-width: 6px 0 6px 8.7px;
   border-color: transparent transparent transparent #007bff;
