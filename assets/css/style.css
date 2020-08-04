@@ -50,14 +50,13 @@ main {
 
 /*=====indicator=====*/
 .indicator {
-  /* height: 10px; */
   position: relative;
   display: flex;
   justify-content: center;
   margin-top: 20px;
 }
 
-.indicator .dot {
+.indicator .item {
   border-radius: 50%;
   background-color: #999999;
   width: 10px;
@@ -65,11 +64,11 @@ main {
   cursor: pointer;
 }
 
-.indicator .dot.active {
+.indicator .item.active {
   background-color: #fff;
 }
 
-.dot + .dot{
+.indicator .item + .item{
   margin-left: 10px;
 }
 

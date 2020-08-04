@@ -15,9 +15,9 @@ $(function () {
       let indicatorHTML = "";
 
       for (let i=1; i<=slideLength; i++){
-        indicatorHTML += "<div class=dot>" + "</div>";
+        indicatorHTML += "<div class=item>" + "</div>";
         $indicator.html(indicatorHTML);
-        $(".dot").eq(currentIndex).addClass("active");
+        $(".item").eq(currentIndex).addClass("active");
       }
     }
 
@@ -74,8 +74,8 @@ $(function () {
       if(currentIndex == slideLength){
         currentIndex = 0;
       }
-      $(".dot").removeClass("active");
-      $(".dot").eq(currentIndex).addClass("active");
+      $(".item").removeClass("active");
+      $(".item").eq(currentIndex).addClass("active");
     }
 
     //インジケータークリック処理
@@ -119,7 +119,7 @@ $(function () {
       });
       $(".prev").on("click", prevSlide);
       $(".next").on("click", nextSlide);
-      $(".dot").on("click", clickDots);
+      $(".item").on("click", clickDots);
     }
 
     init();
