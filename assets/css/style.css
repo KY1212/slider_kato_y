@@ -83,8 +83,7 @@ main {
   transform: translate(-50%);
 }
 
-.prev,
-.next {
+.btnGroup .btn {
   border-radius: 50%;
   width: 21px;
   height: 21px;
