@@ -53,7 +53,7 @@ $(function () {
 
     //タイマースタート
     function startTimer() {
-      const interval = 2000;
+      const interval = 200000;
       timer = setInterval(function(){
         currentIndex++;
         changeSlide(currentIndex);
