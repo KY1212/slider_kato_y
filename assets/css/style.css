@@ -15,11 +15,6 @@ main {
   padding: 100px 0 480px;
 }
 
-footer {
-  height: 480px;
-  width: 607px;
-}
-
 .heading {
   font-size: 52px;
   text-align: center;
@@ -76,7 +71,7 @@ footer {
 }
 
 /*=====btn=====*/
-.btn {
+.btnGroup {
   display: flex;
   justify-content: space-between;
   width: calc(100% - 40px);
@@ -98,19 +93,19 @@ footer {
   cursor: pointer;
 }
 
-.btnIcon::before {
+.btn::before {
   content: "";
   background-color: #fff;
   border-style: solid;
 }
 
-.prev.btnIcon::before {
+.prev.btn::before {
   margin-right: 4px;
   border-width: 6px 8.7px 6px 0;
   border-color: transparent #007bff transparent transparent;
 }
 
-.next.btnIcon::before {
+.next.btn::before {
   margin-left: 4px;
   border-width: 6px 0 6px 8.7px;
   border-color: transparent transparent transparent #007bff;
