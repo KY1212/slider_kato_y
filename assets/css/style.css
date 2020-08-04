@@ -25,7 +25,8 @@ main {
 .sliderWrap {
   margin: 20px auto;
   position: relative;
-  width: 587px;
+  width: 607px;
+  box-sizing: border-box
 }
 
 .slider {
