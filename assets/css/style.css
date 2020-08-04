@@ -90,23 +90,25 @@ main {
   background-color: #fff;
   display: flex;
   justify-content: center;
-  align-items: center;
   cursor: pointer;
 }
 
-.btn::before {
+.btnGroup .btn::before {
   content: "";
   background-color: #fff;
-  border-style: solid;
+  border: 7px solid transparent;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-.prev.btn::before {
+.btnGroup .prev.btn::before {
   margin-right: 4px;
   border-width: 6px 8.7px 6px 0;
   border-color: transparent #007bff transparent transparent;
 }
 
-.next.btn::before {
+.btnGroup .next.btn::before {
   margin-left: 4px;
   border-width: 6px 0 6px 8.7px;
   border-color: transparent transparent transparent #007bff;
