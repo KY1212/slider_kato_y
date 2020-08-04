@@ -91,11 +91,12 @@ main {
   display: flex;
   justify-content: center;
   cursor: pointer;
+  position: relative;
 }
 
 .btnGroup .btn::before {
   content: "";
-  background-color: #fff;
+  background-color: transparent;
   border: 7px solid transparent;
   position: absolute;
   top: 50%;
@@ -103,14 +104,12 @@ main {
 }
 
 .btnGroup .prev.btn::before {
-  margin-right: 4px;
-  border-width: 6px 8.7px 6px 0;
-  border-color: transparent #007bff transparent transparent;
+  border-right: 11px solid #00566F;
+  right: 7px;
 }
 
 .btnGroup .next.btn::before {
-  margin-left: 4px;
-  border-width: 6px 0 6px 8.7px;
-  border-color: transparent transparent transparent #007bff;
+  border-left: 11px solid #00566F;
+  left: 7px;
 }
 
