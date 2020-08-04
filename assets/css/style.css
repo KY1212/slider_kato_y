@@ -43,7 +43,7 @@ main {
 
 .slider .slide {
   width: 587px;
-  height: 322px;
+  height: auto;
 }
 
 /*=====indicator=====*/
