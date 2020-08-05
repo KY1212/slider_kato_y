@@ -79,7 +79,7 @@ $(function () {
     }
 
     //インジケータークリック処理
-    function clickDots() {
+    function goSomewhere() {
       currentIndex = $(this).index();
       updateNav(currentIndex);
       changeSlide(currentIndex);
@@ -119,7 +119,7 @@ $(function () {
       });
       $(".prev").on("click", prevSlide);
       $(".next").on("click", nextSlide);
-      $(".item").on("click", clickDots);
+      $(".item").on("click", goSomewhere);
     }
 
     init();
