@@ -5,7 +5,6 @@ $(function () {
     //変数の設定
     const $slides = $(".slides");
     const $slide = $(".slide");
-    const duration = 1000;
     let currentIndex=0;
     let slideLength = $slide.length;
 
@@ -32,6 +31,7 @@ $(function () {
 
     //スライドアニメーション
     function changeSlide(currentIndex) {
+      const duration = 1000;
       const slideWidth = $slide.outerWidth();
       $slides.stop(true).animate({
         left: (currentIndex+1) * -100 + "%"
