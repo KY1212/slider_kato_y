@@ -70,7 +70,7 @@ $(function () {
     }
 
     //現在のスライド位置をインジケーターに表示
-    function currentDot(currentIndex) {
+    function updateNav() {
       if(currentIndex == slideLength){
         currentIndex = 0;
       }
@@ -81,14 +81,14 @@ $(function () {
     //インジケータークリック処理
     function clickDots() {
       currentIndex = $(this).index();
-      currentDot(currentIndex);
+      updateNav(currentIndex);
       changeSlide(currentIndex);
     }
 
     //prevボタンの処理
     function prevSlide() {
       currentIndex--;
-      currentDot(currentIndex);
+      updateNav(currentIndex);
       changeSlide(currentIndex);
       if(currentIndex == -1){
         currentIndex = 3;
@@ -98,7 +98,7 @@ $(function () {
     //nextボタンの処理
     function nextSlide() {
       currentIndex++;
-      currentDot(currentIndex);
+      updateNav(currentIndex);
       changeSlide(currentIndex);
       if(currentIndex == slideLength){
         currentIndex = 0;
