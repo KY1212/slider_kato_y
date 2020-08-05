@@ -22,7 +22,7 @@ main {
 
 .heading {
   font-size: 52px;
-  line-height: 52px;
+  line-height: 1;
   text-align: center;
   margin: auto;
   width: 146px;
