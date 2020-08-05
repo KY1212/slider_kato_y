@@ -2,6 +2,10 @@
   box-sizing: inherit
 }
 
+html {
+  box-sizing: border-box;
+}
+
 body {
   background-color: #eeeeee;
 }
@@ -23,9 +27,8 @@ main {
 
 /*=====slider=====*/
 .sliderWrap {
-  margin: 20px auto;
+  margin: 20px auto 0;
   width: 607px;
-  box-sizing: border-box
 }
 
 .slider {
