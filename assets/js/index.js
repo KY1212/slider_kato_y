@@ -108,6 +108,8 @@ $(function () {
     function init() {
       cloneSlide();
       addIndicator();
+      setEvent();
+      startTimer();
     }
 
     //クリックで実行
@@ -123,8 +125,6 @@ $(function () {
     }
 
     init();
-    setEvent();
-    startTimer();
 
   }
 
