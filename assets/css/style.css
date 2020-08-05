@@ -94,7 +94,6 @@ main {
 
 .btnGroup .btn::before {
   content: "";
-  background-color: transparent;
   border: 7px solid transparent;
   position: absolute;
   top: 50%;
