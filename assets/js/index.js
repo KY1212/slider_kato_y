@@ -53,14 +53,14 @@ $(function () {
 
     //タイマースタート
     function startTimer() {
-      const interval = 200000;
+      const interval = 2000;
       timer = setInterval(function(){
         currentIndex++;
         changeSlide(currentIndex);
         if(currentIndex == slideLength){
           currentIndex = 0;
         }
-        currentDot(currentIndex);
+        updateNav(currentIndex);
       },interval);
     }
 
