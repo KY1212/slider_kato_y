@@ -13,7 +13,7 @@ $(function () {
       const $indicator = $(".indicator");
       let indicatorHTML = "";
 
-      for (let i=1; i<=slideLength; i++){
+      for (let i=0; i<=slideLength; i++){
         indicatorHTML += "<div class=item>" + "</div>";
         $indicator.html(indicatorHTML);
         $(".item").eq(currentIndex).addClass("active");
